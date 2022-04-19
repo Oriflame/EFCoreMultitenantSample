@@ -3,11 +3,40 @@ In this article you can learn how to implement multi-tenant application with [En
 
 To successfully follow the article it is necessary to have a basic knowledge of using EF with SQL server and ASP.NET Core development.
 
-First part of the article describes what is multi-tenancy and how to approach it. Second part describes a concrete implementation on a demo project.
+First part of the article describes what is multi-tenancy and how to approach it. Second part describes a concrete implementation on a [demo project](https://github.com/Oriflame/EFCoreMultitenantSample).
 
-[[_TOC_]]
+**Table of contents**
+<!-- TOC depthfrom:2 -->
 
-## Single-tenant vs. Multi-tenant system
+- [Multi-tenant system](#multi-tenant-system)
+- [Data isolation strategies](#data-isolation-strategies)
+    - [Single database - schema separation](#single-database---schema-separation)
+    - [Single database - tenant column separation](#single-database---tenant-column-separation)
+    - [Multiple databases - complete data isolation](#multiple-databases---complete-data-isolation)
+    - [Combined approach](#combined-approach)
+- [Identifying tenants](#identifying-tenants)
+    - [Query string](#query-string)
+    - [Host name](#host-name)
+    - [Tenant in base path of URL](#tenant-in-base-path-of-url)
+    - [Request headers](#request-headers)
+    - [Claims](#claims)
+- [Demo project in ASP.NET Core](#demo-project-in-aspnet-core)
+    - [How to run the demo](#how-to-run-the-demo)
+- [Tenant configuration](#tenant-configuration)
+- [Tenant identification and providing tenant configuration](#tenant-identification-and-providing-tenant-configuration)
+    - [Tenant scope middleware](#tenant-scope-middleware)
+    - [Tenant context](#tenant-context)
+    - [Tenant provider](#tenant-provider)
+- [EF DbContext configuration](#ef-dbcontext-configuration)
+    - [SampleDbContext](#sampledbcontext)
+    - [SampleDbContext DI registration](#sampledbcontext-di-registration)
+    - [Tenant based cache key - DbSchemaAwareModelCacheKeyFactory](#tenant-based-cache-key---dbschemaawaremodelcachekeyfactory)
+- [Migrations](#migrations)
+    - [Tenant based migrations generator - DbSchemaAwareSqlServerMigrationsSqlGenerator](#tenant-based-migrations-generator---dbschemaawaresqlservermigrationssqlgenerator)
+
+<!-- /TOC -->
+
+## Multi-tenant system
 **Single tenancy** means that one instance of a software and all necessary infrastructure serves a single customer (tenant).
 
 **Multi-tenancy** means that one instance of a software and all necessary infrastructure serves multiple customers (tenants).
@@ -80,7 +109,7 @@ Uses an HTTP request header to identify the tenant.
 Uses a claim present in authentication cookie or token to identify the tenant.
 
 ## Demo project in ASP.NET Core
-This demo project is a simple ASP.NET Core web application with just an `Index` page showing customer details. The web app demonstrates usage of EF Core 6.0 configured to use combined database access approach. Tenant is identified by query string in URL.
+[Demo project](https://github.com/Oriflame/EFCoreMultitenantSample) is a simple ASP.NET Core web application with just an `Index` page showing customer details. The web app demonstrates usage of EF Core 6.0 configured to use combined database access approach. Tenant is identified by query string in URL.
 
 ### How to run the demo
 To run this project it is necessary to install [Microsoft SQL server (Developer or Express edition)](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) with Windows authentication enabled, see `ConnectionString` in `appsettings.json` bellow.
