@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-EFCoreMultitenantSample.Persistence.EF.DbMigrator-92BA12E9-5130-4C9D-8FD5-90F4B91BC73A</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>    
+    <Content Include="..\EFCoreMultitenantSample.Web\appsettings*.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EFCoreMultitenantSample.Infrastructure\EFCoreMultitenantSample.Infrastructure.csproj" />
+    <ProjectReference Include="..\EFCoreMultitenantSample.Persistence.EF.SQL\EFCoreMultitenantSample.Persistence.EF.SQL.csproj" />
+  </ItemGroup>  
+</Project>

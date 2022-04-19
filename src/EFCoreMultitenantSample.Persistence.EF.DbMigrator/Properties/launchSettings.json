@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "EFCoreMultitenantSample.Persistence.EF.DbMigrator": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

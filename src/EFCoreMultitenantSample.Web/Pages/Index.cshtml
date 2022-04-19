@@ -1,0 +1,38 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-left">
+    @if (Model.CurrentTenant is null)
+    {
+        <h1 class="display-1 alert-warning">No tenant selected!</h1>
+        <p class="display-5">Use one of configured tenants: 
+            @foreach(var tenant in Model.Tenants)
+            {
+                <a href="/?tenant=@tenant">@tenant</a>
+            }
+        </p>
+    }
+    else
+    {
+        <h1 class="display-1 alert-info">@Model.CurrentTenant tenant was selected</h1>
+        <h3 class="display-5">Customer number one</h3>
+        <table>
+            <tr>
+                <td width="100">Identifier:</td>
+                <td class="fw-bold">@Model.CustomerNumberOne?.CustomerId</td>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td class="fw-bold">@Model.CustomerNumberOne?.FirstName</td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td class="fw-bold">@Model.CustomerNumberOne?.LastName</td>
+            </tr>
+        </table>
+    }
+</div>
