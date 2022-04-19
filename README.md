@@ -3,7 +3,7 @@ In this article you can learn how to implement multi-tenant application with [En
 
 To successfully follow the article it is necessary to have a basic knowledge of using EF with SQL server and ASP.NET Core development.
 
-First part of the article describes what is multi-tenancy and how to approach it. Second part describes a concrete implementation on a [demo project](https://github.com/Oriflame/EFCoreMultitenantSample).
+The first part of the article describes what is multi-tenancy and how to approach it. The second part describes a concrete implementation on a [demo project](https://github.com/Oriflame/EFCoreMultitenantSample).
 
 **Table of contents**
 <!-- TOC depthfrom:2 -->
@@ -37,9 +37,9 @@ First part of the article describes what is multi-tenancy and how to approach it
 <!-- /TOC -->
 
 ## Multi-tenant system
-**Single tenancy** means that one instance of a software and all necessary infrastructure serves a single customer (tenant).
+**Single tenancy** means that one instance of software and all necessary infrastructure serves a single customer (tenant).
 
-**Multi-tenancy** means that one instance of a software and all necessary infrastructure serves multiple customers (tenants).
+**Multi-tenancy** means that one instance of software and all necessary infrastructure serves multiple customers (tenants).
 
 Typical examples of multi-tenant software are cloud SaaS offerings e.g. Microsoft Azure, Office 365.
 
@@ -60,7 +60,7 @@ Example of tables in database:
 There is a clear separation of tenant data.
 
 ### Single database - tenant column separation
-Customers share a single database and tables. Data in tables usually has a special column `TenantId` which serves as tenant identifier
+Customers share a single database and tables. Data in tables usually have a special column `TenantId` which serves as tenant identifier
 and is used for tenant data filtering.
 
 Example of a `Customer` table:
@@ -70,7 +70,7 @@ Example of a `Customer` table:
 | 1          | cz       | Jan      | Novak     |
 | 2          | us       | John     | Doe       |
 
-This approach can be useful in a simple applications with small amount of data and operations.
+This approach can be useful in simple applications with small amount of data and operations.
 There is also a higher risk for developers to make a bug which exposes other tenant data when not adding `TenantId` in SQL query.
 
 ### Multiple databases - complete data isolation
@@ -79,7 +79,7 @@ Each customer has a separate database (or even dedicated SQL server) and thus co
 ### Combined approach
 In some cases it is a good idea to use a combination of schema separation in a single database and complete isolation having separate databases for some customers.
 
-Tenants who needs smaller database resources can be assigned to use a shared database, 
+Tenants who need smaller database resources can be assigned to use a shared database, 
 while tenants with high database or security demands can choose to have a separate database.
 
 **This approach is used in this demo project**.
@@ -112,7 +112,7 @@ Uses a claim present in authentication cookie or token to identify the tenant.
 [Demo project](https://github.com/Oriflame/EFCoreMultitenantSample) is a simple ASP.NET Core web application with just an `Index` page showing customer details. The web app demonstrates usage of EF Core 6.0 configured to use combined database access approach. Tenant is identified by query string in URL.
 
 ### How to run the demo
-To run this project it is necessary to install [Microsoft SQL server (Developer or Express edition)](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) with Windows authentication enabled, see `ConnectionString` in `appsettings.json` bellow.
+To run this project it is necessary to install [Microsoft SQL server (Developer or Express edition)](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) with Windows authentication enabled, see `ConnectionString` in `appsettings.json` below.
 
 Next step is to execute database migrations by running `EFCoreMultitenantSample.Persistence.EF.DbMigrator` project. Migrations create all necessary databases and tables.
 ![DbMigrator](./docs/db-migrator.jpg)
